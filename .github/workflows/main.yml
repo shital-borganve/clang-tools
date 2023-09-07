@@ -1,0 +1,27 @@
+name: Clang Tools
+
+on:
+  push:
+    branches:
+      - main # Change this to the default branch of your repository
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install clang-tools
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y clang-tidy clang-format
+        
+      - name: Run clang-tidy
+        run: |
+          clang-tidy your_source_code.cpp
+        
+      - name: Run clang-format
+        run: |
+          clang-format -i your_source_code.cpp
